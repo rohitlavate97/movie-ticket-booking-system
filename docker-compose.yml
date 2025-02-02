@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  eureka-server:
+    build: ./movie-service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      - server.port=8761
+      - spring.application.name=movie-services-registry
+      - eureka.client.register-with-eureka=false
+      - eureka.client.fetch-registry=false
+  booking-service:
+    build: ./booking-service
+    ports:
+      - "8080:8080"
+    environment:
+      - server.port=8080
+      - spring.application.name=booking-service
+      - eureka.client.register-with-eureka=true
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "9090:9090"
+    environment:
+      - server.port=9090
+      - spring.application.name=booking-service
+      - eureka.client.register-with-eureka=true
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+
+
+
