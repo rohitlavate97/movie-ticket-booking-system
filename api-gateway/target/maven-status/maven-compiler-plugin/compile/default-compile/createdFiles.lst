@@ -1,1 +1,2 @@
 com/movie/ticket/booking/system/MovieTicketBookingSystemApiGateway.class
+com/movie/ticket/booking/system/api/gateway/BookingControllerFallBackApi.class

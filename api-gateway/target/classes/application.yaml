@@ -3,6 +3,18 @@ server:
 spring:
   application:
     name: ${APPLICATION_NAME:api-gateway}
+  cloud:
+    gateway:
+      routes:
+       - id: bookings-route
+         uri: lb://booking-service
+         predicates:
+              - Path=/bookings/**
+         filters:
+           - name: CircuitBreaker
+             args:
+               name: booking-route
+               fallbackUrl: forward:/booking-fallback
 eureka:
   client:
     register-with-eureka: ${REGISTER_WITH_EUREKA:true}
