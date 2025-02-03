@@ -22,9 +22,19 @@
     <module>booking-service</module>
     <module>movie-service-registry</module>
     <module>payment-service</module>
+      <module>notification-service</module>
   </modules>
   <dependencies>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
