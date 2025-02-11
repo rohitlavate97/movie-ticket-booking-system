@@ -13,7 +13,7 @@ spring:
          filters:
            - name: CircuitBreaker
              args:
-               name: booking-route
+               name: bookings-route
                fallbackUrl: forward:/booking-fallback
 eureka:
   client:

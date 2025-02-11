@@ -9,6 +9,15 @@ services:
       - APPLICATION_NAME=movie-services-registry
       - REGISTER_WITH_EUREKA=false
       - FETCH_REGISTRY=false
+  api-gateway:
+    build: ./api-gateway
+    ports:
+        - "8009:8765"
+    environment:
+      - SERVER_PORT=8765
+      - APPLICATION_NAME=api-gateway
+      - REGISTER_WITH_EUREKA=true
+      - DEFAULT_ZONE=http://eureka-server:8761/eureka/
   booking-service:
     build: ./booking-service
     ports:

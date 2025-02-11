@@ -9,6 +9,7 @@ public class BookingControllerFallBackApi {
     @GetMapping("/booking-fallback")
     public Mono<String> bookingFallBackApi() {
         //As it is reactive gateway method return type should be Mono<String>
+        //need to fix circuitbreaker issue
         return Mono.just( "Booking Service is under Maintenance");
     }
 }
