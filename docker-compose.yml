@@ -17,41 +17,59 @@ services:
       - APPLICATION_NAME=movie-services-registry
       - REGISTER_WITH_EUREKA=false
       - FETCH_REGISTRY=false
+
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
     ports:
         - "8009:8765"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+#BookingService will not start until eureka-server up and running
+#service_healthy,service_completed_successfully are similar
     environment:
       - SERVER_PORT=8765
       - APPLICATION_NAME=api-gateway
       - REGISTER_WITH_EUREKA=true
       - DEFAULT_ZONE=http://eureka-server:8761/eureka/
+
   booking-service:
     build: ./booking-service
     container_name: booking-service
     ports:
       - "8080:8080"
+    depends_on:
+      eureka-server:
+          condition: service_healthy
     environment:
       - SERVER_PORT=8080
       - APPLICATION_NAME=booking-service
       - REGISTER_WITH_EUREKA=true
       - DEFAULT_ZONE=http://eureka-server:8761/eureka/
+
   payment-service:
     build: ./payment-service
     container_name: payment-service
     ports:
       - "9090:9090"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
     environment:
       - SERVER_PORT=9090
       - APPLICATION_NAME=payment-service
       - REGISTER_WITH_EUREKA=true
       - DEFAULT_ZONE=http://eureka-server:8761/eureka/
+
   notification-service:
     build: ./notification-service
     container_name: notification-service
     ports:
       - "7070:7070"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
     environment:
       - SERVER_PORT=7070
       - APPLICATION_NAME=notification-service
