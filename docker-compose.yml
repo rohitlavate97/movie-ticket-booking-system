@@ -3,8 +3,8 @@ services:
   eureka-server:
     build: ./movie-service-registry
     container_name: eureka-server
-    ports:
-      - "8761:8761"
+#    ports:
+ #     - "8761:8761"
     healthcheck:
       test: "curl --fail --silent localhost:8761/actuator/heath"
       interval: 15s
@@ -37,8 +37,8 @@ services:
   booking-service:
     build: ./booking-service
     container_name: booking-service
-    ports:
-      - "8080:8080"
+#    ports:
+ #     - "8080:8080"
     depends_on:
       eureka-server:
           condition: service_healthy
@@ -51,8 +51,8 @@ services:
   payment-service:
     build: ./payment-service
     container_name: payment-service
-    ports:
-      - "9090:9090"
+#    ports:
+ #     - "9090:9090"
     depends_on:
       eureka-server:
         condition: service_healthy
@@ -65,8 +65,8 @@ services:
   notification-service:
     build: ./notification-service
     container_name: notification-service
-    ports:
-      - "7070:7070"
+#    ports:
+ #     - "7070:7070"
     depends_on:
       eureka-server:
         condition: service_healthy
