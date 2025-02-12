@@ -8,3 +8,22 @@ eureka:
     register-with-eureka: ${REGISTER_WITH_EUREKA:false}
 #(bydefault it is true, made it false)
     fetch-registry: ${FETCH_REGISTRY:false}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#includes all health matrics to check it localhost:8761/actuator/health
+  health:
+    liveness-state:
+      enabled: true
+#It makes sure spring boot app always up and running, e.g incase of db failure(ready to take traffic)
+    readiness-state:
+      enabled: true
+#it checks if ready to take requests
+  endpoint:
+      health:
+        probes:
+          enabled: true
+#http://localhost:8761/actuator/beans to check bean is created or not and service is working or not
+#http://localhost:8761/actuator/metrics for JVM information
