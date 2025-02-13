@@ -3,14 +3,14 @@ services:
   eureka-server:
     build: ./movie-service-registry
     container_name: eureka-server
-#    ports:
- #     - "8761:8761"
-    healthcheck:
-      test: "curl --fail --silent localhost:8761/actuator/heath"
-      interval: 15s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+    ports:
+     - "8761:8761"
+#    healthcheck:
+#      test: "curl --fail --silent localhost:8761/actuator/health"
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 10s
 #For every 15sec retry it will execute command and wait for 5 sec
     environment:
       - SERVER_PORT=8761
@@ -23,9 +23,9 @@ services:
     container_name: api-gateway
     ports:
         - "8009:8765"
-    depends_on:
-      eureka-server:
-        condition: service_healthy
+#    depends_on:
+#      eureka-server:
+#        condition: service_healthy
 #BookingService will not start until eureka-server up and running
 #service_healthy,service_completed_successfully are similar
     environment:
@@ -37,11 +37,11 @@ services:
   booking-service:
     build: ./booking-service
     container_name: booking-service
-#    ports:
- #     - "8080:8080"
-    depends_on:
-      eureka-server:
-          condition: service_healthy
+    ports:
+      - "8080:8080"
+#    depends_on:
+#      eureka-server:
+#          condition: service_healthy
     environment:
       - SERVER_PORT=8080
       - APPLICATION_NAME=booking-service
@@ -51,11 +51,11 @@ services:
   payment-service:
     build: ./payment-service
     container_name: payment-service
-#    ports:
- #     - "9090:9090"
-    depends_on:
-      eureka-server:
-        condition: service_healthy
+    ports:
+      - "9090:9090"
+#    depends_on:
+#      eureka-server:
+#        condition: service_healthy
     environment:
       - SERVER_PORT=9090
       - APPLICATION_NAME=payment-service
@@ -65,16 +65,13 @@ services:
   notification-service:
     build: ./notification-service
     container_name: notification-service
-#    ports:
- #     - "7070:7070"
-    depends_on:
-      eureka-server:
-        condition: service_healthy
+    ports:
+      - "7070:7070"
+#    depends_on:
+#      eureka-server:
+#        condition: service_healthy
     environment:
       - SERVER_PORT=7070
       - APPLICATION_NAME=notification-service
       - REGISTER_WITH_EUREKA=true
       - DEFAULT_ZONE=http://eureka-server:8761/eureka/
-
-
-
