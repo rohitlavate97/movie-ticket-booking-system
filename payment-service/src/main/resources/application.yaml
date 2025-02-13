@@ -8,8 +8,20 @@ eureka:
    register-with-eureka: ${REGISTER_WITH_EUREKA:true}
    service-url:
     defaultZone: ${DEFAULT_ZONE:http://localhost:8761/eureka/}
-#management:
-# endpoints:
-#  web:
-#   exposure:
-#    include: "*"
+management:
+ endpoints:
+  web:
+   exposure:
+    include: "*"
+ health:
+  liveness-state:
+   enabled: true
+  #It makes sure spring boot app always up and running,
+  #gincase of db failure(ready to take traffic)
+  readiness-state:
+   enabled: true
+  #it checks if ready to take requests
+ endpoint:
+   health:
+    probes:
+     enabled: true

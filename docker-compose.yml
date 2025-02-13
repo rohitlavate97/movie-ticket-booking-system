@@ -5,12 +5,12 @@ services:
     container_name: eureka-server
     ports:
      - "8761:8761"
-#    healthcheck:
-#      test: "curl --fail --silent localhost:8761/actuator/health"
-#      interval: 5s
-#      timeout: 5s
-#      retries: 5
-#      start_period: 10s
+    healthcheck:
+      test: "curl --fail --silent localhost:8765/actuator/health/readiness | grep UP || exit 0"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 #For every 15sec retry it will execute command and wait for 5 sec
     environment:
       - SERVER_PORT=8761
@@ -22,12 +22,18 @@ services:
     build: ./api-gateway
     container_name: api-gateway
     ports:
-        - "8009:8765"
-#    depends_on:
-#      eureka-server:
-#        condition: service_healthy
+        - "8765:8765"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
 #BookingService will not start until eureka-server up and running
 #service_healthy,service_completed_successfully are similar
+    healthcheck:
+      test: "curl --fail --silent localhost:8765/actuator/health/readiness | grep UP || exit 0"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       - SERVER_PORT=8765
       - APPLICATION_NAME=api-gateway
@@ -39,9 +45,13 @@ services:
     container_name: booking-service
     ports:
       - "8080:8080"
-#    depends_on:
-#      eureka-server:
-#          condition: service_healthy
+    depends_on:
+      eureka-server:
+          condition: service_healthy
+      api-gateway:
+        condition: service_healthy
+      payment-service:
+        condition: service_healthy
     environment:
       - SERVER_PORT=8080
       - APPLICATION_NAME=booking-service
@@ -53,9 +63,17 @@ services:
     container_name: payment-service
     ports:
       - "9090:9090"
-#    depends_on:
-#      eureka-server:
-#        condition: service_healthy
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      api-gateway:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:9090/actuator/health/readiness | grep UP || exit 0"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       - SERVER_PORT=9090
       - APPLICATION_NAME=payment-service
