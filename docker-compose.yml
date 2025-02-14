@@ -93,3 +93,4 @@ services:
       - APPLICATION_NAME=notification-service
       - REGISTER_WITH_EUREKA=true
       - DEFAULT_ZONE=http://eureka-server:8761/eureka/
+#need to add mysqldb as booking,payment,notification services depends on it
