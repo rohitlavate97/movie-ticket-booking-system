@@ -31,8 +31,8 @@ public class BookingEntity {
     private List<String> seatsBooked;
     @Column(name = "show_date")
     private LocalDate showDate;
-    @Column(name = "show_date")
-    private LocalTime startTime;
+    @Column(name = "show_time")
+    private LocalTime showTime;
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
     @Column(name = "booking_amount")

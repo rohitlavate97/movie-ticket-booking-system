@@ -1,5 +1,6 @@
 package com.movie.ticket.booking.system.service.controller;
 
+import com.movie.ticket.booking.system.service.BookingService;
 import com.movie.ticket.booking.system.service.broker.PaymentServiceBroker;
 import com.movie.ticket.booking.system.service.dto.BookingDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -19,13 +20,13 @@ which service it going to cal
 */
 public class BookingAPI {
     @Autowired
-    private PaymentServiceBroker paymentServiceBroker;
+    private BookingService bookingService;
     /*
     REST Principle: method name has to be action
     */
     @GetMapping("/test")
     public BookingDTO createBooking(@RequestBody BookingDTO bookingDTO) {
         log.info("Entered {} class", BookingAPI.class);
-        return null;
+        return this.bookingService.createBooking(bookingDTO);
     }
 }
