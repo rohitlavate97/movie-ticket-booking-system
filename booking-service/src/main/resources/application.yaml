@@ -3,6 +3,14 @@ server:
 spring:
   application:
    name: ${APPLICATION_NAME:booking-service}
+   datasource:
+     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:bookings?createDatabaseIfNotExist=true}
+     username: ${MYSQL_USER:root}
+     password: ${MYSQL_PASSWORD:}
+   jpa:
+     hibernate:
+       ddl-auto: update
+     show-sql: true
 eureka:
   client:
    register-with-eureka: ${REGISTER_WITH_EUREKA:true}
