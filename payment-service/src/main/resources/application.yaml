@@ -33,3 +33,5 @@ management:
    health:
     probes:
      enabled: true
+stripe:
+ key: sk_test_51QsnOl2MRIuFOfqBNdnOnN1lYvPVdQMpY1eEll2kDYNFOJLdcABhnQF3CkfbuuF0Z9uRIBUrAhufKKWXx4cdiesR00IbKzanj7
