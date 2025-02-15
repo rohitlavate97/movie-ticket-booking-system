@@ -33,6 +33,8 @@ public class BookingServiceImpl implements BookingService {
                 .bookingStatus(BookingStatus.PENDING)
                 .build();
         this.bookingRepository.save(bookingEntity);
+        //modify bookingDto before sending it to payment-service
+        bookingDTO.setBookingId(bookingEntity.getBookingId());
         //call the payment-service
         return BookingDTO.builder()
                 .bookingId(bookingEntity.getBookingId())
