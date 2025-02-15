@@ -14,6 +14,7 @@
         <module name="movie-service-registry" />
         <module name="payment-service" />
         <module name="notification-service" />
+        <module name="commons" />
         <module name="booking-service" />
       </profile>
     </annotationProcessing>
@@ -22,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="booking-service" options="-parameters" />
+      <module name="commons" options="-parameters" />
       <module name="movie-service-registry" options="-parameters" />
       <module name="movie-ticket-booking-system" options="-parameters" />
       <module name="notification-service" options="-parameters" />

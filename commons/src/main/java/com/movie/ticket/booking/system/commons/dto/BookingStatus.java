@@ -1,4 +1,4 @@
-package com.movie.ticket.booking.system.service.entity;
+package com.movie.ticket.booking.system.commons.dto;
 
 public enum BookingStatus {
     /*The initial status when a booking request is submitted*/

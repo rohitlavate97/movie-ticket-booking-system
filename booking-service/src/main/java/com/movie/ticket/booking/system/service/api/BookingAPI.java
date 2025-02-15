@@ -1,8 +1,8 @@
 package com.movie.ticket.booking.system.service.api;
 
+import com.movie.ticket.booking.system.commons.dto.BookingDTO;
 import com.movie.ticket.booking.system.service.BookingService;
-import com.movie.ticket.booking.system.service.constants.LoggerConstants;
-import com.movie.ticket.booking.system.service.dto.BookingDTO;
+import com.movie.ticket.booking.system.commons.constants.LoggerConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

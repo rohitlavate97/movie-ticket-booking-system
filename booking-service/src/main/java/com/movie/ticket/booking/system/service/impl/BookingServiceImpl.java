@@ -1,10 +1,10 @@
 package com.movie.ticket.booking.system.service.impl;
 
+import com.movie.ticket.booking.system.commons.dto.BookingDTO;
+import com.movie.ticket.booking.system.commons.dto.BookingStatus;
 import com.movie.ticket.booking.system.service.BookingService;
 import com.movie.ticket.booking.system.service.broker.PaymentServiceBroker;
-import com.movie.ticket.booking.system.service.dto.BookingDTO;
 import com.movie.ticket.booking.system.service.entity.BookingEntity;
-import com.movie.ticket.booking.system.service.entity.BookingStatus;
 import com.movie.ticket.booking.system.service.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

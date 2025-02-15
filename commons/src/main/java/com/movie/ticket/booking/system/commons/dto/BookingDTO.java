@@ -1,6 +1,5 @@
-package com.movie.ticket.booking.system.service.dto;
+package com.movie.ticket.booking.system.commons.dto;
 
-import com.movie.ticket.booking.system.service.entity.BookingStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;

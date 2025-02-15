@@ -1,4 +1,4 @@
-package com.movie.ticket.booking.system.service.constants;
+package com.movie.ticket.booking.system.commons.constants;
 
 public enum LoggerConstants {
     ENTERED_CONTROLLER_MESSAGE("Entered {} Controller of {} class with value {}"),
