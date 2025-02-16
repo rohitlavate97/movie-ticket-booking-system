@@ -36,11 +36,17 @@ public class BookingServiceImpl implements BookingService {
         //modify bookingDto before sending it to payment-service
         bookingDTO.setBookingId(bookingEntity.getBookingId());
         //call the payment-service
+        bookingDTO=this.paymentServiceBroker.makePayment(bookingDTO);
+        /*set new status to existing entity which is stored in db*/
+        bookingEntity.setBookingStatus(bookingDTO.getBookingStatus());
+        /*If method is annotated with @Transactional we don't need to do multiple save
+        this.bookingRepository.save(bookingEntity);
+        */
         return BookingDTO.builder()
                 .bookingId(bookingEntity.getBookingId())
                 .bookingAmount(bookingEntity.getBookingAmount())
-                //changing status to CONFIRMED
-                .bookingStatus(BookingStatus.CONFIRMED)
+                /*changing status to CONFIRMED from bookingEntity*/
+                .bookingStatus(bookingEntity.getBookingStatus())
                 .movieId(bookingEntity.getMovieId())
                 .showDate(bookingEntity.getShowDate())
                 .showTime(bookingEntity.getShowTime())

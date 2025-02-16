@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 
 @Service
 @Slf4j
@@ -43,6 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .makePayment(paymentEntity.getPaymentAmount());
         if(paymentStaus.equals(PaymentStaus.APPROVED)){
             paymentEntity.setPaymentStaus(paymentStaus);
+            paymentEntity.setPaymentTimeStamp(LocalDateTime.now());
             bookingDTO.setBookingStatus(BookingStatus.CONFIRMED);
         }else{
             paymentEntity.setPaymentStaus(PaymentStaus.FAILED);
