@@ -44,6 +44,8 @@ public class PaymentServiceImpl implements PaymentService {
         this.stripePaymentGateway.makePayment(bookingDTO);
         paymentEntity.setPaymentTimeStamp(LocalDateTime.now());
         if(bookingDTO.getBookingStatus().equals(BookingStatus.CONFIRMED)){
+            /*also we can check paymentDTO,getPaymentStatus().equals("APPROVED") and change bookingstatus
+            accordingly*/
             paymentEntity.setPaymentStaus(PaymentStaus.APPROVED);
             /*bookingDTO.setBookingStatus(BookingStatus.CONFIRMED);*/
         }else{

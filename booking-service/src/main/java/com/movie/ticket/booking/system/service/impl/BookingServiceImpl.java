@@ -34,8 +34,10 @@ public class BookingServiceImpl implements BookingService {
                 .bookingStatus(BookingStatus.PENDING)
                 .build();
         this.bookingRepository.save(bookingEntity);
-        //modify bookingDto before sending it to payment-service
+        /*modify bookingDto before sending it to payment-service*/
         bookingDTO.setBookingId(bookingEntity.getBookingId());
+        /*setting bookingstatus in dto before sending to payment-service to avoid NullPointerException*/
+        bookingDTO.setBookingStatus(BookingStatus.PENDING);
         //call the payment-service
         bookingDTO=this.paymentServiceBroker.makePayment(bookingDTO);
         /*set new status to existing entity which is stored in db*/
