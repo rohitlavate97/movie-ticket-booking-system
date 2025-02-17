@@ -41,12 +41,11 @@ public class PaymentServiceImpl implements PaymentService {
         get the secret key)*/
         this.paymentRepository.save(paymentEntity);
         /*make call to payment-gateway*/
-        PaymentStaus paymentStaus=this.stripePaymentGateway
-                .makePayment(paymentEntity.getPaymentAmount());
-        if(paymentStaus.equals(PaymentStaus.APPROVED)){
-            paymentEntity.setPaymentStaus(paymentStaus);
-            paymentEntity.setPaymentTimeStamp(LocalDateTime.now());
-            bookingDTO.setBookingStatus(BookingStatus.CONFIRMED);
+        this.stripePaymentGateway.makePayment(bookingDTO);
+        paymentEntity.setPaymentTimeStamp(LocalDateTime.now());
+        if(bookingDTO.getBookingStatus().equals(BookingStatus.CONFIRMED)){
+            paymentEntity.setPaymentStaus(PaymentStaus.APPROVED);
+            /*bookingDTO.setBookingStatus(BookingStatus.CONFIRMED);*/
         }else{
             paymentEntity.setPaymentStaus(PaymentStaus.FAILED);
             bookingDTO.setBookingStatus(BookingStatus.CANCELLED);

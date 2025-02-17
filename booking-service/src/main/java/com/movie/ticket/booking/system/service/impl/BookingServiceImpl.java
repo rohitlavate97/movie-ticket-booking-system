@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookingServiceImpl implements BookingService {
+    @Autowired
     private PaymentServiceBroker paymentServiceBroker;
     @Autowired
     private BookingRepository bookingRepository;
