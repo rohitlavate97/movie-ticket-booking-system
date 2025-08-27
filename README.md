@@ -158,5 +158,3 @@ mvn clean install -DskipTests
 - Access denied for MySQL root → create an application user (`appuser/strongpass`) and use that in the services.
 - Gateway fallback showing maintenance → ensure dependent services are registered and healthy in Eureka.
 
-## License
-MIT (or your preferred license)
